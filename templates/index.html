@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+  <head>
+    <meta
+      name="description"
+      content="CBE Thermal Comfort tool to calculate thermal comfort according to ASHRAE Standard 55-2020, thermal comfort, PMV, PPD, SET, Adaptive comfort, Center for the Built Environment, CBE, UC Berkeley, Predicted Mean Vote, Predicted Percentage of Dissatisfied, Standard Equivalent Temperature, Ole Fanger, Richard de Dear, Gail Brager, Draft, Draught, Air Movement, Metabolic activity, Clothing Insulation, MET, CLO"
+    />
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="static/img/favico.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Open Graph protocol tags -->
+    <meta property="og:title" content="CBE Thermal Comfort Tool" />
+    <meta
+      property="og:description"
+      content="CBE Thermal Comfort Tool to calculate thermal comfort indexes (e.g. PMV, PPD, SET, Adaptive) in compliance with AHSRAE and EN Standards"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://comfort.cbe.berkeley.edu" />
+    <meta
+      property="og:image"
+      content="https://comfort.cbe.berkeley.edu/static/img/og_ashrae.png"
+    />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6T3GQN7C1T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6T3GQN7C1T');
+    </script>
+
+    {% block head %}
+    <script src="static/js/lib/fontawesome.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="static/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="static/css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/layout.css" />
+    <script type="text/javascript" src="static/js/lib/d3.js"></script>
+    <script type="text/javascript" src="static/js/lib/chartjs.js"></script>
+    <script
+      type="text/javascript"
+      src="static/js/lib/jquery-1.6.2.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="static/js/lib/jquery-ui.min.js"
+    ></script>
+    <script type="text/javascript" src="../static/js/util.js"></script>
+    <script
+      type="text/javascript"
+      src="../static/js/comfort-models.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../static/js/psychrometrics.js"
+    ></script>
+    <script type="text/javascript" src="../static/js/erf.js"></script>
+    <script
+      type="text/javascript"
+      src="static/js/lib/underscore-min.js"
+    ></script>
+    <script src="../static/js/lib/buttons.js"></script>
+    {% endblock %}
+  </head>
+  <body>
+    {# Navigation bar #}
+    <div class="container-flex bg-light border-bottom">
+      <div class="container p-0">
+        <div class="d-flex align-items-center">
+          <a href="/">
+            <div>
+              <img
+                alt="Center for the built environment logo"
+                src="static/img/CBE-logo-2018.png"
+                id="navCBELogo"
+              />
+            </div>
+          </a>
+          <div class="d-flex flex-column w-100">
+            <div class="p-2">
+              <h4 class="m-0" style="color: #0f75bb; display: inline-block">
+                CBE Thermal Comfort Tool
+              </h4>
+              <div style="display: inline-block; float: right">
+                <a
+                  href="https://center-for-the-built-environment.gitbook.io/thermal-comfort-tool/help/help"
+                  target="_blank"
+                  class="m-2"
+                  >Help</a
+                >
+                <a
+                  href="https://cbe.berkeley.edu/resources/tools/"
+                  target="_blank"
+                  class="m-2"
+                  >Other CBE tools</a
+                >
+              </div>
+            </div>
+            <div class="topnav" id="mytopnav">
+              <a class="nav-link" id="nav_a_ashrae" href="/">ASHRAE-55</a>
+              <a class="nav-link" id="nav_a_en" href="EN">EN-16798</a>
+              <a class="nav-link" id="nav_a_compare" href="compare">Compare</a>
+              <a class="nav-link" id="nav_a_ranges" href="ranges">Ranges</a>
+              <a class="nav-link" id="nav_a_upload" href="upload">Upload</a>
+              <a class="nav-link" id="nav_a_fans" href="fan_heatwaves"
+                >Fans & Heat</a
+              >
+              <a class="nav-link" id="nav_a_phs" href="phs">PHS</a>
+              <a class="nav_icon" onclick="myFunction()">
+                <span class="btn-line"></span>
+                <span class="btn-line"></span>
+                <span class="btn-line"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Body #} {% block content %} {% endblock %} {# Footer #}
+    <div
+      class="container-fluid py-3 text-white"
+      style="background-color: #124f7f"
+    >
+      <div class="container">
+        <div
+          class="row footer justify-content-between justify-content-lg-center"
+        >
+          <div class="col-md-8 col-lg-6">
+            <p>
+              <strong>Please cite us if you use this software: </strong>
+              <a
+                href="https://www.sciencedirect.com/science/article/pii/S2352711020302454?via%3Dihub"
+                style="color: white"
+                >Tartarini, F., Schiavon, S., Cheung, T., Hoyt, T., 2020. CBE
+                Thermal Comfort Tool : online tool for thermal comfort
+                calculations and visualizations. SoftwareX 12, 100563.
+                https://doi.org/10.1016/j.softx.2020.100563</a
+              >
+            </p>
+            <p>
+              <a
+                href="https://center-for-the-built-environment.gitbook.io/thermal-comfort-tool/documentation/changelog"
+                style="color: white"
+                >Version: 2.4.3</a
+              >
+            </p>
+          </div>
+          <div class="col-md-4 col-lg-3 mb-3 text-center">
+            <p class="mb-4">
+              <a
+                href="https://center-for-the-built-environment.gitbook.io/thermal-comfort-tool/help/help"
+                ><strong>Contact us</strong></a
+              >
+            </p>
+            <div class="row footer justify-content-center">
+              <div class="col center">
+                <a
+                  href="https://github.com/CenterForTheBuiltEnvironment/comfort_tool"
+                >
+                  <img
+                    alt="source code repository"
+                    src="/static/img/logo-github.svg"
+                    width="30"
+                  /> </a
+                ><br />
+                Code
+              </div>
+              <div class="col center">
+                <a
+                  href="https://github.com/CenterForTheBuiltEnvironment/comfort_tool/issues"
+                >
+                  <img
+                    alt="submit an issue"
+                    src="/static/img/logo-github.svg"
+                    width="30"
+                  /> </a
+                ><br />
+                Issues
+              </div>
+              <div class="col">
+                <a href="https://youtu.be/v3NcabOAGKk?t=62">
+                  <img
+                    alt="tutorial videos playlist"
+                    src="/static/img/youtube_64dp.png"
+                  /> </a
+                ><br />
+                Tool Overview
+              </div>
+            </div>
+          </div>
+          <div
+            class="
+              flex flex-column
+              text-center
+              justify-content-center
+              col-xs-4 col-md-4 col-lg-2
+              mt-md-3 mt-lg-0
+            "
+          >
+            <a href="https://cbe.berkeley.edu"
+              ><img
+                alt="CBE logo"
+                src="static/img/footer-logo.png"
+                style="max-height: 45px"
+            /></a>
+            <br />
+            <img
+              alt="UC Berkeley logo"
+              src="static/img/ucb-logo.png"
+              class="mt-2"
+              style="max-height: 45px"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    function myFunction() {
+      const x = document.getElementById("mytopnav");
+
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+  </script>
+</html>
